@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from customtkinter import CTkImage 
-from tkinter import filedialog
-from PIL import Image
+from tkinter import filedialog, PhotoImage
+from PIL import Image, ImageTk
 import numpy as np
 # from tensorflow.keras.models import load_model
 # from tensorflow.keras.preprocessing.image import load_img, img_to_array
@@ -67,13 +67,26 @@ def reset_app():
 app = ctk.CTk()
 app.geometry("450x650")
 app.title("Car Finder")
-# app.iconbitmap("favicon.ico")
+app.resizable(False, False)
+
+carF = Image.open("car.png")
+carF = carF.resize((50, 28))
+favicon = ImageTk.PhotoImage(carF) 
+app.iconphoto(False, favicon)
 
 canvas = ctk.CTkCanvas(app, height=100, bg="#0508a6", bd=0, highlightthickness=0)
 canvas.pack(fill="x", padx=0, pady=0)
 
 title_label = ctk.CTkLabel(app, text="Car Finder", font=ctk.CTkFont(size=28, weight="bold"), fg_color="#0508a6")
 title_label.place(x=20, y=35) 
+
+car = Image.open("car.png")
+car = car.resize((100, 56))
+car_icon = Image.new("RGB", (100, 56), "#0508a6")
+car_icon.paste(car, (0, 0), car) 
+car_icon_ctk = CTkImage(light_image=car_icon, dark_image=car_icon, size=(100, 56))
+icon_label = ctk.CTkLabel(app, image=car_icon_ctk, text="")
+icon_label.place(x=320, y=40) 
 
 upload_button = ctk.CTkButton(app, text="upload photo", command=upload_file, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
 upload_button.pack(pady=20)
