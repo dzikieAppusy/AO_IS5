@@ -1,61 +1,68 @@
 import customtkinter as ctk
+from customtkinter import CTkImage 
 from tkinter import filedialog
-from PIL import Image, ImageTk
+from PIL import Image
 
-# Initialize the customtkinter theme
-ctk.set_appearance_mode("System")  # Options: "System", "Light", "Dark"
-ctk.set_default_color_theme("blue")  # Options: "blue", "green", "dark-blue"
+ctk.set_appearance_mode("System")
+ctk.set_default_color_theme("dark-blue")
 
-# Function to handle file upload
+img_path = None
+
 def upload_file():
-    global img_label, uploaded_img_path
-    uploaded_img_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg")])
-    if uploaded_img_path:
-        # Load and display the image
-        img = Image.open(uploaded_img_path)
+    global img_path
+    result_label.configure(text="", text_color="red")
+    
+    img_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg")])
+    if img_path:
+        img = Image.open(img_path)
         img = img.resize((300, 200))
-        img = ImageTk.PhotoImage(img)
-        img_label.configure(image=img)
-        img_label.image = img  # Keep reference to avoid garbage collection
-        prediction_label.configure(text="")  # Clear prediction
+        ctk_img = CTkImage(light_image=img, dark_image=img, size=(300, 200)) 
+        img_label.configure(image=ctk_img)
+        img_label.image = ctk_img
+        img_label.configure(text="")
 
-# Function to handle prediction
-def predict_car_model():
-    global uploaded_img_path
-    if not uploaded_img_path:
-        prediction_label.configure(text="Please upload an image first!", text_color="red")
+def search_for_car_model():
+    global img_path
+    if not img_path:
+        result_label.configure(text="Please upload a photo.", text_color="red")
         return
 
-    # Simulated prediction for now
-    predicted_model = "Simulated Model: Tesla Model 3"
+    result_label.configure(text="", text_color="red")
+    result = "Tesla Model 3"
     
-    # Update the result
-    prediction_label.configure(text=f"Predicted Car Model: {predicted_model}", text_color="green")
+    result_label.configure(text=f"{result}", text_color="green")
+    
+def reset_app():
+    global img_path
+    img_path = None
+    img_label.configure(image=None)
+    img_label.image = None
+    result_label.configure(text="No photo uploaded.")
+    
+    
 
-# Create the main application window
 app = ctk.CTk()
 app.geometry("600x500")
-app.title("Car Model Finder")
+app.title("Car Finder")
 
-# Add title
-title_label = ctk.CTkLabel(app, text="Car Model Finder", font=ctk.CTkFont(size=20, weight="bold"))
+title_label = ctk.CTkLabel(app, text="Car Finder", font=ctk.CTkFont(size=20, weight="bold"))
 title_label.pack(pady=20)
 
-# Upload button
-upload_button = ctk.CTkButton(app, text="Upload Image", command=upload_file)
+upload_button = ctk.CTkButton(app, text="upload photo", command=upload_file)
 upload_button.pack(pady=20)
 
-# Image display area
-img_label = ctk.CTkLabel(app, text="Your image will appear here", width=300, height=200, corner_radius=10)
+img_label = ctk.CTkLabel(app, text="No photo uploaded.", width=300, height=200, corner_radius=10)
 img_label.pack(pady=20)
 
-# Predict button
-predict_button = ctk.CTkButton(app, text="Predict", command=predict_car_model)
-predict_button.pack(pady=20)
+find_button = ctk.CTkButton(app, text="find model", command=search_for_car_model)
+find_button.pack(pady=20)
 
-# Prediction result label
-prediction_label = ctk.CTkLabel(app, text="", font=ctk.CTkFont(size=16))
-prediction_label.pack(pady=20)
+# reset_button = ctk.CTkButton(app, text="reset", command=reset_app)
+# reset_button.pack(pady=20)
 
-# Run the application
+result_label = ctk.CTkLabel(app, text="", font=ctk.CTkFont(size=16))
+result_label.pack(pady=20)
+
+
+
 app.mainloop()
