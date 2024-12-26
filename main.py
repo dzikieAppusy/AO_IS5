@@ -10,13 +10,18 @@ img_path = None
 
 def upload_file():
     global img_path
-    result_label.configure(text="", text_color="red")
+    result_label.configure(text="")
     
     img_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg")])
     if img_path:
         img = Image.open(img_path)
-        img = img.resize((300, 200))
-        ctk_img = CTkImage(light_image=img, dark_image=img, size=(300, 200)) 
+        
+        original_width, original_height = img.size
+        new_height = 200
+        new_width = int(original_width * (new_height / original_height))
+        img = img.resize((new_width, new_height))
+        
+        ctk_img = CTkImage(light_image=img, dark_image=img, size=(new_width, new_height)) 
         img_label.configure(image=ctk_img)
         img_label.image = ctk_img
         img_label.configure(text="")
@@ -27,7 +32,7 @@ def search_for_car_model():
         result_label.configure(text="Please upload a photo.", text_color="red")
         return
 
-    result_label.configure(text="", text_color="red")
+    result_label.configure(text="")
     result = "Tesla Model 3"
     
     result_label.configure(text=f"{result}", text_color="green")
@@ -35,14 +40,19 @@ def search_for_car_model():
 def reset_app():
     global img_path
     img_path = None
-    img_label.configure(image=None)
-    img_label.image = None
-    result_label.configure(text="No photo uploaded.")
     
+    if hasattr(img_label, 'image') and img_label.image is not None:
+        img_label.configure(image=None, text="No photo uploaded.")
+        img_label.image = None
+    else:
+        img_label.configure(text="No photo uploaded.")
     
+    result_label.configure(text="")
+
+
 
 app = ctk.CTk()
-app.geometry("600x500")
+app.geometry("500x600")
 app.title("Car Finder")
 
 title_label = ctk.CTkLabel(app, text="Car Finder", font=ctk.CTkFont(size=20, weight="bold"))
@@ -57,8 +67,8 @@ img_label.pack(pady=20)
 find_button = ctk.CTkButton(app, text="find model", command=search_for_car_model)
 find_button.pack(pady=20)
 
-# reset_button = ctk.CTkButton(app, text="reset", command=reset_app)
-# reset_button.pack(pady=20)
+reset_button = ctk.CTkButton(app, text="reset", command=reset_app)
+reset_button.pack(pady=20)
 
 result_label = ctk.CTkLabel(app, text="", font=ctk.CTkFont(size=16))
 result_label.pack(pady=20)
