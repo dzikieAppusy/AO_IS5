@@ -12,13 +12,14 @@ ctk.set_default_color_theme("green")
 CLASS_AMOUNT=20
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#
+
 model = mobilenet_v2(pretrained=False)
 num_features = model.classifier[1].in_features
 model.classifier[1] = torch.nn.Linear(num_features, CLASS_AMOUNT) 
 model.load_state_dict(torch.load("model-I/final_model.pth", map_location=device))
 model.eval()
 model.to(device)
+
 # Definicja transformacji
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -52,7 +53,7 @@ def upload_file():
         img_label.image = ctk_img
         img_label.configure(text="")
 
-def search_for_car_model():
+def search_for_car_model_1():
     global img_path
     if not img_path:
         result_label.configure(text="Please upload a photo.", text_color="red")
@@ -74,6 +75,29 @@ def search_for_car_model():
     except Exception as e:
         result_label.configure(text="Error in prediction.", text_color="red")
         print(e)
+        
+def search_for_car_model_2():
+    global img_path
+    if not img_path:
+        result_label.configure(text="Please upload a photo.", text_color="red")
+        return
+
+    result_label.configure(text="")
+    try:
+        # Przetwarzanie obrazu
+        img = Image.open(img_path).convert("RGB")
+        img_tensor = transform(img).unsqueeze(0).to(device)
+
+        # Przewidywanie
+        with torch.no_grad():
+            outputs = model(img_tensor)
+            _, predicted_idx = torch.max(outputs, 1)
+            result = classes[predicted_idx.item()]
+
+        result_label.configure(text=f"{result}", text_color="white")
+    except Exception as e:
+        result_label.configure(text="Error in prediction.", text_color="red")
+        print(e)        
     
 def reset_app():
     global img_path
@@ -119,8 +143,11 @@ img_label.pack(pady=20)
 result_label = ctk.CTkLabel(app, text="", font=ctk.CTkFont(size=18))
 result_label.pack(pady=20)
 
-find_button = ctk.CTkButton(app, text="find model", command=search_for_car_model, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
-find_button.pack(pady=20)
+find_button_1 = ctk.CTkButton(app, text="find - model I", command=search_for_car_model_1, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
+find_button_1.pack(pady=20)
+
+find_button_2 = ctk.CTkButton(app, text="find - model II", command=search_for_car_model_2, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
+find_button_2.pack(pady=20)
 
 reset_button = ctk.CTkButton(app, text="reset", command=reset_app, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
 reset_button.pack(pady=20)
