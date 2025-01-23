@@ -11,9 +11,9 @@ Aplikacja została w całości napisana w języku programowania Python. Można w
 
 
 ### 2. Podział pracy
-- Anna Nowak - GUI, dokumentacja, testy manualne
+* Anna Nowak - GUI, dokumentacja, testy manualne
 * Emil Gruszecki - trenowanie modelu II, dokumentacja, testy manualne
-+ Sebastian Zarębski - trenowanie modelu I, dokumentacja, testy manualne
+* Sebastian Zarębski - trenowanie modelu I, dokumentacja, testy manualne
 
 
 ### 3. [Model I](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-I)
@@ -78,9 +78,9 @@ Aplikację uruchamiamy komendą python main.py znajdując się w głównym folde
 <p align="center">
   <img src="https://github.com/user-attachments/assets/d628fbdf-e471-42cb-8fa9-713ce0576d6c" />
 </p>
-- Upload photo - przycisk odpowiadający za wybranie zdjęcia, wyskakuje okno, w którym wybieramy zdjęcie samochodu, które chcemy, aby model rozpoznał.
+* Upload photo - przycisk odpowiadający za wybranie zdjęcia, wyskakuje okno, w którym wybieramy zdjęcie samochodu, które chcemy, aby model rozpoznał.
 * Find model - przycisk, który wywołuje rozpoznawanie modelu przez aplikację i wypisuje na ekranie nazwę modelu samochodu.
-+ Reset - przycisk resetujący aplikację do stanu wejściowego.
+* Reset - przycisk resetujący aplikację do stanu wejściowego.
 
 
 
