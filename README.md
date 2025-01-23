@@ -5,8 +5,8 @@ Projekt polegał na zrobieniu aplikacji desktopowej, która na podstawie załado
 
 Aplikacja została w całości napisana w języku programowania Python. Można wyróżnić w niej 3 główne części: 
 * **GUI** wykorzystujące moduły customtkinter, tkinter
-* **metoda I uczenia modelu** stworzona przy użyciu modułów torch oraz torchvision
-* **metoda II uczenia modelu** z wykorzystaniem API tensorflow.keras.
+* **model I PyTorch** stworzona przy użyciu modułów torch oraz torchvision
+* **model II Keras** z wykorzystaniem API tensorflow.keras.
 
 
 
