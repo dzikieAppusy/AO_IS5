@@ -11,13 +11,21 @@ Aplikacja została w całości napisana w języku programowania Python. Można w
 
 
 ### 2. Podział pracy
-- Anna Nowak - GUI, dokumentacja
-* Emil Gruszecki - trenowanie modelu II, dokumentacja
-+ Sebastian Zarębski - trenowanie modelu I, dokumentacja
+- Anna Nowak - GUI, dokumentacja, testy manualne
+* Emil Gruszecki - trenowanie modelu II, dokumentacja, testy manualne
++ Sebastian Zarębski - trenowanie modelu I, dokumentacja, testy manualne
 
 
 ### 3. [Model I](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-I)
-Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. Ten znajdujący się w projekcie ma właśnie taką dokładność.
+Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. Ten znajdujący się w projekcie ma właśnie taką dokładność. Model sprawdza dobrze w przypadku samochodów o bardzo charakterystycznym wyglądzie, takich jak przykładowo Nissan Leaf Hatchback 2012,
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d628fbdf-e471-42cb-8fa9-713ce0576d6c" />
+</p>
+jak również modeli samochodów o wyglądzie bardziej zbliżonym, np. model potrafi rozróżnić ze stosunkowo wysoką poprawnością Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012. 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d628fbdf-e471-42cb-8fa9-713ce0576d6c" />
+</p>
+Zdecydowana większość obrazów samochodów (zarówno tych pochodzących ze zbioru zdjęć wykorzystanych do trenowania modelu jak i zdjęć z Grafiki Google) jest rozpoznawana prawidłowo.
 
 #### Marki samochodów które są rozpoznawane przez aplikację:
 ```
