@@ -16,7 +16,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = mobilenet_v2(pretrained=False)
 num_features = model.classifier[1].in_features
 model.classifier[1] = torch.nn.Linear(num_features, CLASS_AMOUNT) 
-model.load_state_dict(torch.load("best_model.pth", map_location=device))
+model.load_state_dict(torch.load("model-I/final_model.pth", map_location=device))
 model.eval()
 model.to(device)
 # Definicja transformacji
@@ -25,7 +25,7 @@ transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
-classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "Bentley Mulsanne Sedan 2011","BMW 6 Series Convertible 2007","Cadillac CTS-V Sedan 2012","Chevrolet Corvette Convertible 2012","Chevrolet Malibu Sedan 2007","Daewoo Nubira Wagon 2002","Dodge Ram Pickup 3500 Crew Cab 2010","Ferrari California Convertible 2012","FIAT 500 Convertible 2012","Fisker Karma Sedan 2012","Ford Focus Sedan 2007","Geo Metro Convertible 1993","GMC Savana Van 2012","Honda Odyssey Minivan 2012","Infiniti G Coupe IPL 2012","Mercedes-Benz C-Class Sedan 2012","Nissan Leaf Hatchback 2012"]
+classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "BMW 6 Series Convertible 2007", "Bentley Mulsanne Sedan 2011", "Cadillac CTS-V Sedan 2012", "Chevrolet Corvette Convertible 2012", "Chevrolet Malibu Sedan 2007", "Daewoo Nubira Wagon 2002", "Dodge Ram Pickup 3500 Crew Cab 2010", "FIAT 500 Convertible 2012", "Ferrari California Convertible 2012", "Fisker Karma Sedan 2012","Ford Focus Sedan 2007", "GMC Savana Van 2012", "Geo Metro Convertible 1993", "Honda Odyssey Minivan 2012", "Infiniti G Coupe IPL 2012", "Mercedes-Benz C-Class Sedan 2012", "Nissan Leaf Hatchback 2012"]
 
 img_path = None
 
@@ -70,19 +70,10 @@ def search_for_car_model():
             _, predicted_idx = torch.max(outputs, 1)
             result = classes[predicted_idx.item()]
 
-        result_label.configure(text=f"Predicted: {result}", text_color="white")
+        result_label.configure(text=f"{result}", text_color="white")
     except Exception as e:
         result_label.configure(text="Error in prediction.", text_color="red")
         print(e)
-    # img = load_img(img_path, target_size=(224, 224))
-    # img_array = img_to_array(img) / 255.0
-    # img_array = np.expand_dims(img_array, axis=0)
-
-    # predictions = model.predict(img_array)
-    # result = np.argmax(predictions)
-    # result = "Tesla Model 3"
-    
-    # result_label.configure(text=f"{result}", text_color="white")
     
 def reset_app():
     global img_path

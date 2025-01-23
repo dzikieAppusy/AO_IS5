@@ -1,18 +1,36 @@
 import customtkinter as ctk
 from customtkinter import CTkImage 
-from tkinter import filedialog, PhotoImage
+from tkinter import filedialog
 from PIL import Image, ImageTk
 import numpy as np
+import torch
+from torchvision import transforms
+from torchvision.models import mobilenet_v2
 import sys
 import os
-# from tensorflow.keras.models import load_model
-# from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("green")
+CLASS_AMOUNT=20
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+model = mobilenet_v2(pretrained=False)
+num_features = model.classifier[1].in_features
+model.classifier[1] = torch.nn.Linear(num_features, CLASS_AMOUNT) 
+model.load_state_dict(torch.load("best_model.pth", map_location=device))
+model.eval()
+model.to(device)
+
+# Definicja transformacji
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+])
+classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "Bentley Mulsanne Sedan 2011","BMW 6 Series Convertible 2007","Cadillac CTS-V Sedan 2012","Chevrolet Corvette Convertible 2012","Chevrolet Malibu Sedan 2007","Daewoo Nubira Wagon 2002","Dodge Ram Pickup 3500 Crew Cab 2010","Ferrari California Convertible 2012","FIAT 500 Convertible 2012","Fisker Karma Sedan 2012","Ford Focus Sedan 2007","Geo Metro Convertible 1993","GMC Savana Van 2012","Honda Odyssey Minivan 2012","Infiniti G Coupe IPL 2012","Mercedes-Benz C-Class Sedan 2012","Nissan Leaf Hatchback 2012"]
 
 img_path = None
-# model = load_model('model.h5')
 car_icon_path = os.path.join(sys._MEIPASS, "car.png")
 
 def upload_file():
@@ -45,16 +63,21 @@ def search_for_car_model():
         return
 
     result_label.configure(text="")
-    
-    # img = load_img(img_path, target_size=(224, 224))
-    # img_array = img_to_array(img) / 255.0
-    # img_array = np.expand_dims(img_array, axis=0)
+    try:
+        # Przetwarzanie obrazu
+        img = Image.open(img_path).convert("RGB")
+        img_tensor = transform(img).unsqueeze(0).to(device)
 
-    # predictions = model.predict(img_array)
-    # result = np.argmax(predictions)
-    result = "Tesla Model 3"
-    
-    result_label.configure(text=f"{result}", text_color="white")
+        # Przewidywanie
+        with torch.no_grad():
+            outputs = model(img_tensor)
+            _, predicted_idx = torch.max(outputs, 1)
+            result = classes[predicted_idx.item()]
+
+        result_label.configure(text=f"{result}", text_color="white")
+    except Exception as e:
+        result_label.configure(text="Error in prediction.", text_color="red")
+        print(e)
     
 def reset_app():
     global img_path
