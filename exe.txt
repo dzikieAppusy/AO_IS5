@@ -1,0 +1,1 @@
+pyinstaller --onefile --noconsole --icon=car.ico --add-data "car.png:." --hidden-import=tkinter --hidden-import=PyQt5.sip --collect-all PIL main.py
