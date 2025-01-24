@@ -17,21 +17,24 @@ Aplikacja została w całości napisana w języku programowania Python. Można w
 
 
 ### 3. [Model I](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-I)
-Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. Ten znajdujący się w projekcie ma właśnie taką dokładność. Model sprawdza dobrze w przypadku samochodów o bardzo charakterystycznym wyglądzie, takich jak przykładowo Nissan Leaf Hatchback 2012,
+Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. [Model I](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-I/final_model.pth) ma właśnie taką dokładność. Model sprawdza dobrze w przypadku samochodów o bardzo charakterystycznym wyglądzie, takich jak przykładowo Nissan Leaf Hatchback 2012,
 
 <p align="center">
-  <img src="" />
+  <img src="./readme-zdj/zdj1.png" />
+  <br />
   Zdjęcie 1. Poprawne rozpoznanie zdjęcia modelu Nissan Leaf Hatchback 2012, źródło obrazu Grafika Google.
 </p>
 
 jak również modeli samochodów o wyglądzie bardziej zbliżonym, np. model potrafi rozróżnić ze stosunkowo wysoką poprawnością Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012. 
 
 <p align="center">
-  <img src="" />
+  <img src="./readme-zdj/zdj2.png" />
+  <br />
   Zdjęcie 2. Poprawne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu modelI/imgs_zip/cars_train.
 </p>
 <p align="center">
-  <img src="" />
+  <img src="./readme-zdj/zdj3.png" />
+  <br />
   Zdjęcie 3. Błędne rozpoznanie zdjęcia modelu Chevrolet Corvette Convertible 2012, źródło obrazu modelI/imgs_zip/cars_train.
 </p>
 
