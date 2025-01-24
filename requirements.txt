@@ -1,8 +1,25 @@
-matplotlib~=3.10.0
-numpy~=2.0.2
-tensorflow~=2.18.0
-keras~=3.7.0
-scikit-learn~=1.6.0
-imutils~=0.5.4
+#wersja języka i moduły wykorzystane do stworzenia aplikacji
+Python==3.12.2
 
-torch~=2.5.1
+#model I (pytorch_main.py)
+torch==2.5.1
+torchvision==0.20.1
+torchaudio==2.5.0
+pillow==11.0.0
+numpy==2.0.2
+
+#model II (main_Emil.py)
+matplotlib==3.10.0
+numpy==2.0.2
+tensorflow==2.18.0
+keras==3.7.0
+scikit-learn==1.6.0
+imutils==0.5.4
+
+#aplikacja desktopowa
+customtkinter==5.2.2
+numpy==2.0.2
+pillow==11.0.0
+torch==2.5.1
+torchvision==0.20.1
+tensorflow==2.18.0

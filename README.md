@@ -28,11 +28,11 @@ jak również modeli samochodów o wyglądzie bardziej zbliżonym, np. model pot
 
 <p align="center">
   <img src="" />
-  Zdjęcie 2. Poprawne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu imgs_zip/cars_train.
+  Zdjęcie 2. Poprawne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu modelI/imgs_zip/cars_train.
 </p>
 <p align="center">
   <img src="" />
-  Zdjęcie 3. Błędne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu imgs_zip/cars_train.
+  Zdjęcie 3. Błędne rozpoznanie zdjęcia modelu Chevrolet Corvette Convertible 2012, źródło obrazu modelI/imgs_zip/cars_train.
 </p>
 
 #### Marki samochodów, które są rozpoznawane przez aplikację:
@@ -68,7 +68,7 @@ Program działa poprawnie dla znacznej większości danych znajdujących się w 
 
 
 ### 5. Wymagania niezbędne do uruchomienia aplikacji
-
+W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzsytanych do wytrenowania modelu oraz zbudowania aplikacji desktopowej.
 
 
 ### 6. Użytkowanie aplikacji
