@@ -105,10 +105,9 @@ W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requ
 
 
 ### 8. Źródła
-* obrazy znajdujące się w folderze model-I/imgs_zip/cars_train należą do 
+* obrazy znajdujące się w folderze model-I/imgs_zip/cars_train należą do Stanford Cars Dataset, wybrano z niego 20 klas - https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset
 * pliki z model-II/
 * zawartość folderu zdj-testowe-grafika-google pochodzą z Grafiki Google
-* Stanford Cars Dataset, wybrano z niego 20 klas - https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset
 
 
 
