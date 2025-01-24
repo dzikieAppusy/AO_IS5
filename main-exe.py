@@ -57,21 +57,21 @@ transform = transforms.Compose([
 ])
 pytorch_classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "BMW 6 Series Convertible 2007", "Bentley Mulsanne Sedan 2011", "Cadillac CTS-V Sedan 2012", "Chevrolet Corvette Convertible 2012", "Chevrolet Malibu Sedan 2007", "Daewoo Nubira Wagon 2002", "Dodge Ram Pickup 3500 Crew Cab 2010", "FIAT 500 Convertible 2012", "Ferrari California Convertible 2012", "Fisker Karma Sedan 2012","Ford Focus Sedan 2007", "GMC Savana Van 2012", "Geo Metro Convertible 1993", "Honda Odyssey Minivan 2012", "Infiniti G Coupe IPL 2012", "Mercedes-Benz C-Class Sedan 2012", "Nissan Leaf Hatchback 2012"]
 keras_classes = [
-    "acura",
-    "audi",
-    "ferrari",
-    "bmw",
-    "bugatti",
-    "mini",
-    "cadillac",
-    "chevrolet",
-    "citroen",
-    "bentley",
-    "honda",
-    "mercedes",
-    "mazda",
-    "volvo",
-    "nissan"
+    "Acura",
+    "Audi",
+    "Ferrari",
+    "BMW",
+    "Bugatti",
+    "Mini",
+    "Cadillac",
+    "Chevrolet",
+    "Citroen",
+    "Bentley",
+    "Honda",
+    "Mercedes",
+    "Mazda",
+    "Volvo",
+    "Nissan"
 ]
 
 def upload_file():
