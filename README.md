@@ -90,7 +90,7 @@ W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requ
 * **upload photo** - przycisk odpowiadający za załadowanie zdjęcia. Otwiera okno, w którym użytkownik może wybrać z eksploratora plików zdjęcie samochodu w formacie .jpg, które chce aby model rozpoznał
 * **find - model I** - przycisk, który wywołuje akcję rozpoznawania modelu przy użuciu Modelu I i wypisuje na ekranie nazwę rozpoznanego modelu samochodu. W przypadku niepowodzenia operacji wyświetlona zostanie informacja o błędzie
 * **find - model II** - przycisk, który wywołuje akcję rozpoznawania modelu przy użuciu Modelu II i wypisuje na ekranie nazwę rozpoznanego modelu samochodu. W przypadku niepowodzenia operacji wyświetlona zostanie informacja o błędzie
-* **reset** - przycisk usuwający wczytany aktualnie obraz z pamięci aplikacji i resetujący aplikację do stanu początkowego.
+* **reset** - przycisk usuwający wczytany aktualnie obraz z pamięci aplikacji i resetujący aplikację do stanu początkowego
 
 
 
