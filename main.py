@@ -31,7 +31,9 @@ transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
-classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "BMW 6 Series Convertible 2007", "Bentley Mulsanne Sedan 2011", "Cadillac CTS-V Sedan 2012", "Chevrolet Corvette Convertible 2012", "Chevrolet Malibu Sedan 2007", "Daewoo Nubira Wagon 2002", "Dodge Ram Pickup 3500 Crew Cab 2010", "FIAT 500 Convertible 2012", "Ferrari California Convertible 2012", "Fisker Karma Sedan 2012","Ford Focus Sedan 2007", "GMC Savana Van 2012", "Geo Metro Convertible 1993", "Honda Odyssey Minivan 2012", "Infiniti G Coupe IPL 2012", "Mercedes-Benz C-Class Sedan 2012", "Nissan Leaf Hatchback 2012"]
+pytorch_classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "BMW 6 Series Convertible 2007", "Bentley Mulsanne Sedan 2011", "Cadillac CTS-V Sedan 2012", "Chevrolet Corvette Convertible 2012", "Chevrolet Malibu Sedan 2007", "Daewoo Nubira Wagon 2002", "Dodge Ram Pickup 3500 Crew Cab 2010", "FIAT 500 Convertible 2012", "Ferrari California Convertible 2012", "Fisker Karma Sedan 2012","Ford Focus Sedan 2007", "GMC Savana Van 2012", "Geo Metro Convertible 1993", "Honda Odyssey Minivan 2012", "Infiniti G Coupe IPL 2012", "Mercedes-Benz C-Class Sedan 2012", "Nissan Leaf Hatchback 2012"]
+keras_classes = []
+
 
 img_path = None
 
@@ -74,7 +76,7 @@ def search_for_car_model_1():
         with torch.no_grad():
             outputs = pytorch_model(img_tensor)
             _, predicted_idx = torch.max(outputs, 1)
-            result = classes[predicted_idx.item()]
+            result = pytorch_classes[predicted_idx.item()]
 
         result_label.configure(text=f"{result}", text_color="white")
     except Exception as e:
@@ -91,13 +93,14 @@ def search_for_car_model_2():
     try:
         # Przetwarzanie obrazu
         img = Image.open(img_path).convert("RGB")
-        img_tensor = transform(img).unsqueeze(0).to(device)
+        img = img.resize((224, 224))
+        img_array = img_to_array(img) / 255.0
+        img_array = np.expand_dims(img_array, axis=0)
 
         # Przewidywanie
-        with torch.no_grad():
-            outputs = pytorch_model(img_tensor)
-            _, predicted_idx = torch.max(outputs, 1)
-            result = classes[predicted_idx.item()]
+        predictions = keras_model.predict(img_array)
+        predicted_idx = np.argmax(predictions)
+        result = keras_classes[predicted_idx]
 
         result_label.configure(text=f"{result}", text_color="white")
     except Exception as e:
