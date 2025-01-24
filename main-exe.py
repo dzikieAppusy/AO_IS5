@@ -22,10 +22,20 @@ IMG_WIDTH = 224
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]
 
+
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for both development and PyInstaller bundle."""
+    if hasattr(sys, "_MEIPASS"):  # PyInstaller creates a temporary folder `_MEIPASS`
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
 img_path = None
-car_icon_path = os.path.join(sys._MEIPASS, "car.png")
-model_I_path = os.path.join(sys._MEIPASS, "model-I/best_model.pth")
-model_II_path = os.path.join(sys._MEIPASS, "model-II/best_model_ENV2B0_74.keras")
+car_icon_path = resource_path("car.png")
+model_I_path = resource_path("model-I/best_model.pth")
+model_II_path = resource_path("model-II/best_model_ENV2B0_74.keras")
+
+
 
 #PyTorch Model (model I)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
