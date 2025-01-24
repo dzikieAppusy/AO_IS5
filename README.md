@@ -35,9 +35,7 @@ jak również modeli samochodów o wyglądzie bardziej zbliżonym, np. model pot
   Zdjęcie 3. Błędne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu imgs_zip/cars_train.
 </p>
 
-Zdecydowana większość obrazów samochodów (zarówno tych pochodzących ze zbioru zdjęć wykorzystanych do trenowania modelu jak i zdjęć z Grafiki Google) jest rozpoznawana prawidłowo.
-
-#### Marki samochodów które są rozpoznawane przez aplikację:
+#### Marki samochodów, które są rozpoznawane przez aplikację:
 ```
 Aston Martin Virage Coupe 2012
 Audi R8 Coupe 2012
@@ -61,7 +59,7 @@ Mercedes-Benz C-Class Sedan 2012
 Nissan Leaf Hatchback 2012
 ```
 
-Program na pewno działa poprawnie dla danych znajdujących się w folderze imgs_zip/cars_train, oraz dla niektórych zdjęć wypisanych powyżej modeli pochodzących z wyszukiwarki Grafiki Google. Nie uda się natomiast uzyskać pozytywnego rezultatu jeżeli wykorzystamy zdjęcie modelu auta, którego rozpoznawania model I nie został nauczony. W przypadku użycia jakiegokolwiek zdjęcia niezwiązanego z modelami aut również obiekt przedstawiony na zdjęciu nie zostanie poprawnie rozpoznany.
+Program działa poprawnie dla znacznej większości danych znajdujących się w folderze imgs_zip/cars_train, oraz dla niektórych zdjęć wypisanych powyżej modeli pochodzących z wyszukiwarki Grafiki Google. Nie uda się natomiast uzyskać pozytywnego rezultatu jeżeli wykorzystamy zdjęcie modelu auta, którego rozpoznawania model PyTorch nie został nauczony. W przypadku użycia jakiegokolwiek zdjęcia niezwiązanego z modelami aut obiekt przedstawiony na zdjęciu również nie zostanie poprawnie rozpoznany.
 
 
 
