@@ -6,19 +6,24 @@ import numpy as np
 import torch
 from torchvision import transforms
 from torchvision.models import mobilenet_v2
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array
 
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("green")
 CLASS_AMOUNT=20
 
+#PyTorch Model (model I)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+pytorch_model = mobilenet_v2(pretrained=False)
+num_features = pytorch_model.classifier[1].in_features
+pytorch_model.classifier[1] = torch.nn.Linear(num_features, CLASS_AMOUNT) 
+pytorch_model.load_state_dict(torch.load("model-I/final_model.pth", map_location=device))
+pytorch_model.eval()
+pytorch_model.to(device)
 
-model = mobilenet_v2(pretrained=False)
-num_features = model.classifier[1].in_features
-model.classifier[1] = torch.nn.Linear(num_features, CLASS_AMOUNT) 
-model.load_state_dict(torch.load("model-I/final_model.pth", map_location=device))
-model.eval()
-model.to(device)
+# Keras Model (Mmodel II)
+keras_model = load_model("model-II/best_model_ENV2B0_74.keras")
 
 # Definicja transformacji
 transform = transforms.Compose([
@@ -67,7 +72,7 @@ def search_for_car_model_1():
 
         # Przewidywanie
         with torch.no_grad():
-            outputs = model(img_tensor)
+            outputs = pytorch_model(img_tensor)
             _, predicted_idx = torch.max(outputs, 1)
             result = classes[predicted_idx.item()]
 
@@ -90,7 +95,7 @@ def search_for_car_model_2():
 
         # Przewidywanie
         with torch.no_grad():
-            outputs = model(img_tensor)
+            outputs = pytorch_model(img_tensor)
             _, predicted_idx = torch.max(outputs, 1)
             result = classes[predicted_idx.item()]
 
@@ -111,7 +116,7 @@ def reset_app():
 
 
 app = ctk.CTk()
-app.geometry("450x650")
+app.geometry("450x750")
 app.title("Car Finder")
 app.resizable(False, False)
 
