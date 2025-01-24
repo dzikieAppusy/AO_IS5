@@ -22,10 +22,20 @@ IMG_WIDTH = 224
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]
 
+
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for both development and PyInstaller bundle."""
+    if hasattr(sys, "_MEIPASS"):  # PyInstaller creates a temporary folder `_MEIPASS`
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
 img_path = None
-car_icon_path = os.path.join(sys._MEIPASS, "car.png")
-model_I_path = os.path.join(sys._MEIPASS, "model-I/best_model.pth")
-model_II_path = os.path.join(sys._MEIPASS, "model-II/best_model_ENV2B0_74.keras")
+car_icon_path = resource_path("car.png")
+model_I_path = resource_path("model-I/best_model.pth")
+model_II_path = resource_path("model-II/best_model_ENV2B0_74.keras")
+
+
 
 #PyTorch Model (model I)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -47,21 +57,21 @@ transform = transforms.Compose([
 ])
 pytorch_classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "BMW 6 Series Convertible 2007", "Bentley Mulsanne Sedan 2011", "Cadillac CTS-V Sedan 2012", "Chevrolet Corvette Convertible 2012", "Chevrolet Malibu Sedan 2007", "Daewoo Nubira Wagon 2002", "Dodge Ram Pickup 3500 Crew Cab 2010", "FIAT 500 Convertible 2012", "Ferrari California Convertible 2012", "Fisker Karma Sedan 2012","Ford Focus Sedan 2007", "GMC Savana Van 2012", "Geo Metro Convertible 1993", "Honda Odyssey Minivan 2012", "Infiniti G Coupe IPL 2012", "Mercedes-Benz C-Class Sedan 2012", "Nissan Leaf Hatchback 2012"]
 keras_classes = [
-    "acura",
-    "audi",
-    "ferrari",
-    "bmw",
-    "bugatti",
-    "mini",
-    "cadillac",
-    "chevrolet",
-    "citroen",
-    "bentley",
-    "honda",
-    "mercedes",
-    "mazda",
-    "volvo",
-    "nissan"
+    "Acura",
+    "Audi",
+    "Ferrari",
+    "BMW",
+    "Bugatti",
+    "Mini",
+    "Cadillac",
+    "Chevrolet",
+    "Citroen",
+    "Bentley",
+    "Honda",
+    "Mercedes",
+    "Mazda",
+    "Volvo",
+    "Nissan"
 ]
 
 def upload_file():
