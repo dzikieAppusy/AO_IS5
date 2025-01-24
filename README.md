@@ -17,7 +17,7 @@ Aplikacja została w całości napisana w języku programowania Python. Można w
 
 
 ### 3. [Model I](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-I)
-Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. [Model I](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-I/final_model.pth) ma właśnie taką dokładność. Model sprawdza dobrze w przypadku samochodów o bardzo charakterystycznym wyglądzie, takich jak przykładowo Nissan Leaf Hatchback 2012,
+Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. Model I, oparty na sieci neuronowej MobileNetV2, ma właśnie taką dokładność. Model przyjmuje obrazy RGB o stałym wymiarze 224x224 piksele, dlatego też przed jego zastosowaniem rozmiar testowanego obrazu musi zostać dostosowany do wymaganych wymiarów. Model sprawdza dobrze w przypadku samochodów o bardzo charakterystycznym wyglądzie, takich jak przykładowo Nissan Leaf Hatchback 2012,
 
 <p align="center">
   <img src="./readme-zdj/zdj1.png" />
@@ -71,7 +71,7 @@ Program działa poprawnie dla znacznej większości danych znajdujących się w 
 
 
 ### 5. Wymagania niezbędne do uruchomienia aplikacji
-W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzsytanych do wytrenowania modelu oraz zbudowania aplikacji desktopowej.
+W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzystanych do wytrenowania modelu oraz zbudowania aplikacji desktopowej.
 
 
 ### 6. Użytkowanie aplikacji
@@ -88,7 +88,7 @@ Aplikację uruchamiamy komendą python main.py znajdując się w głównym folde
 ### 7. Przykłady poprawnego działania aplikacji
 * model I - z użyciem losowego zdjęcia samochodu pochodzącego z Grafiki Google, samochód należy do jednej z marek, do których rozpoznawania został wytrenowany model (Infiniti G Coupe IPL 2012)
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/77228328-845f-4951-8a10-cb3309ba7015" />
+  <img src="./readme-zdj/zdj4.png" />
 </p>
 
 *
@@ -96,6 +96,7 @@ Aplikację uruchamiamy komendą python main.py znajdując się w głównym folde
 ### Źródła
 * obrazy znajdujące się w folderze imgs_zip/cars_train należą do 
 * 
+* zawartość folderu zdj-testowe-grafika-google pochodzą z Grafiki Google
 
 
 

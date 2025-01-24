@@ -18,11 +18,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 pytorch_model = mobilenet_v2(pretrained=False)
 num_features = pytorch_model.classifier[1].in_features
 pytorch_model.classifier[1] = torch.nn.Linear(num_features, CLASS_AMOUNT) 
-pytorch_model.load_state_dict(torch.load("model-I/final_model.pth", map_location=device))
+pytorch_model.load_state_dict(torch.load("model-I/best_model.pth", map_location=device))
 pytorch_model.eval()
 pytorch_model.to(device)
 
-# Keras Model (Mmodel II)
+# Keras Model (model II)
 keras_model = load_model("model-II/best_model_ENV2B0_74.keras")
 
 # Definicja transformacji
