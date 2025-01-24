@@ -4,6 +4,7 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 import numpy as np
 import torch
+import tensorflow as tf
 from torchvision import transforms
 from torchvision.models import mobilenet_v2
 from tensorflow.keras.models import load_model
@@ -11,7 +12,12 @@ from tensorflow.keras.preprocessing.image import img_to_array
 
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("green")
+
 CLASS_AMOUNT=20
+IMG_HEIGHT = 224
+IMG_WIDTH = 224
+IMAGENET_MEAN = [0.485, 0.456, 0.406]
+IMAGENET_STD = [0.229, 0.224, 0.225]
 
 #PyTorch Model (model I)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -107,16 +113,24 @@ def search_for_car_model_2():
 
     result_label.configure(text="")
     try:
-        # Przetwarzanie obrazu
-        img = Image.open(img_path).convert("RGB")
-        img = img.resize((224, 224))
-        img_array = img_to_array(img) / 255.0
-        img_array = np.expand_dims(img_array, axis=0)
+        # Przetwarzanie obrazu        
+        img = tf.io.read_file(img_path)
+        img = tf.image.decode_jpeg(img, channels=3)
+        img = tf.image.resize(img, [IMG_HEIGHT, IMG_WIDTH])
+        img = (img - IMAGENET_MEAN) / IMAGENET_STD
+        
+        img_array = tf.expand_dims(img, axis=0)
 
         # Przewidywanie
         predictions = keras_model.predict(img_array)
         predicted_idx = np.argmax(predictions)
         result = keras_classes[predicted_idx]
+        
+        #logs
+        print("Image Path:", img_path)
+        print("Preprocessed Image Array Shape:", img_array.shape)
+        print("Raw Predictions:", predictions)
+        print("Predicted Index:", predicted_idx)
 
         result_label.configure(text=f"{result}", text_color="white")
     except Exception as e:

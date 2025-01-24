@@ -1,5 +1,7 @@
 # Klasyfikacja obiektów - wykrywanie modeli samochodów na postawie zdjęć .jpg
 
+
+
 ### 1. Założenia projektu
 Projekt polegał na zrobieniu aplikacji desktopowej, która na podstawie załadowanego przez użytkownika zdjęcia samochodu w formacie .jpg dopasuje go do jednej z określonych wcześniej, w zestawie użytym do wytrenowania danego modelu, marek samochodów.
 
@@ -16,6 +18,7 @@ Aplikacja została w całości napisana w języku programowania Python. Można w
 * Sebastian Zarębski - trenowanie modelu I, dokumentacja, testy manualne
 
 
+
 ### 3. [Model I](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-I)
 Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. Model I, oparty na sieci neuronowej MobileNetV2, ma właśnie taką dokładność. Model przyjmuje obrazy RGB o stałym wymiarze 224x224 piksele, dlatego też przed jego zastosowaniem rozmiar testowanego obrazu musi zostać dostosowany do wymaganych wymiarów. Model sprawdza dobrze w przypadku samochodów o bardzo charakterystycznym wyglądzie, takich jak przykładowo Nissan Leaf Hatchback 2012,
 
@@ -30,12 +33,12 @@ jak również modeli samochodów o wyglądzie bardziej zbliżonym, np. model pot
 <p align="center">
   <img src="./readme-zdj/zdj2.png" />
   <br />
-  Zdjęcie 2. Poprawne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu modelI/imgs_zip/cars_train.
+  Zdjęcie 2. Poprawne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu model-I/imgs_zip/cars_train.
 </p>
 <p align="center">
   <img src="./readme-zdj/zdj3.png" />
   <br />
-  Zdjęcie 3. Błędne rozpoznanie zdjęcia modelu Chevrolet Corvette Convertible 2012, źródło obrazu modelI/imgs_zip/cars_train.
+  Zdjęcie 3. Błędne rozpoznanie zdjęcia modelu Chevrolet Corvette Convertible 2012, źródło obrazu model-I/imgs_zip/cars_train.
 </p>
 
 #### Marki samochodów, które są rozpoznawane przez aplikację:
@@ -74,14 +77,20 @@ Program działa poprawnie dla znacznej większości danych znajdujących się w 
 W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzystanych do wytrenowania modelu oraz zbudowania aplikacji desktopowej.
 
 
+
 ### 6. Użytkowanie aplikacji
-Aplikację uruchamiamy komendą python main.py znajdując się w głównym folderze projektu. Wyświetla się wtedy następujące okno:
+
+
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d628fbdf-e471-42cb-8fa9-713ce0576d6c" />
+  <img src="./readme-zdj/zdj5.png" />
+  <br />
+  Zdjęcie 4. Okno aplikacji desktopowej <I>Car Finder</I>.
 </p>
-* Upload photo - przycisk odpowiadający za wybranie zdjęcia, wyskakuje okno, w którym wybieramy zdjęcie samochodu, które chcemy, aby model rozpoznał.
-* Find model - przycisk, który wywołuje rozpoznawanie modelu przez aplikację i wypisuje na ekranie nazwę modelu samochodu.
-* Reset - przycisk resetujący aplikację do stanu wejściowego.
+
+* **upload photo** - przycisk odpowiadający za załadowanie zdjęcia. Otwiera okno, w którym użytkownik może wybrać z eksploratora plików zdjęcie samochodu w formacie .jpg, które chce aby model rozpoznał
+* **find - model I** - przycisk, który wywołuje akcję rozpoznawania modelu przy użuciu Modelu I i wypisuje na ekranie nazwę rozpoznanego modelu samochodu. W przypadku niepowodzenia operacji wyświetlona zostanie informacja o błędzie
+* **find - model II** - przycisk, który wywołuje akcję rozpoznawania modelu przy użuciu Modelu II i wypisuje na ekranie nazwę rozpoznanego modelu samochodu. W przypadku niepowodzenia operacji wyświetlona zostanie informacja o błędzie
+* **reset** - przycisk usuwający wczytany aktualnie obraz z pamięci aplikacji i resetujący aplikację do stanu początkowego.
 
 
 
@@ -91,11 +100,13 @@ Aplikację uruchamiamy komendą python main.py znajdując się w głównym folde
   <img src="./readme-zdj/zdj4.png" />
 </p>
 
-*
+* model II - 
 
-### Źródła
-* obrazy znajdujące się w folderze imgs_zip/cars_train należą do 
-* 
+
+
+### 8. Źródła
+* obrazy znajdujące się w folderze model-I/imgs_zip/cars_train należą do 
+* pliki z model-II/
 * zawartość folderu zdj-testowe-grafika-google pochodzą z Grafiki Google
 
 
