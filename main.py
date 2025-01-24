@@ -6,26 +6,50 @@ import numpy as np
 import torch
 from torchvision import transforms
 from torchvision.models import mobilenet_v2
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array
 
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("green")
 CLASS_AMOUNT=20
 
+#PyTorch Model (model I)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#
-model = mobilenet_v2(pretrained=False)
-num_features = model.classifier[1].in_features
-model.classifier[1] = torch.nn.Linear(num_features, CLASS_AMOUNT) 
-model.load_state_dict(torch.load("best_model.pth", map_location=device))
-model.eval()
-model.to(device)
+pytorch_model = mobilenet_v2(pretrained=False)
+num_features = pytorch_model.classifier[1].in_features
+pytorch_model.classifier[1] = torch.nn.Linear(num_features, CLASS_AMOUNT) 
+pytorch_model.load_state_dict(torch.load("model-I/best_model.pth", map_location=device))
+pytorch_model.eval()
+pytorch_model.to(device)
+
+# Keras Model (model II)
+keras_model = load_model("model-II/best_model_ENV2B0_74.keras")
+
 # Definicja transformacji
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
-classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "Bentley Mulsanne Sedan 2011","BMW 6 Series Convertible 2007","Cadillac CTS-V Sedan 2012","Chevrolet Corvette Convertible 2012","Chevrolet Malibu Sedan 2007","Daewoo Nubira Wagon 2002","Dodge Ram Pickup 3500 Crew Cab 2010","Ferrari California Convertible 2012","FIAT 500 Convertible 2012","Fisker Karma Sedan 2012","Ford Focus Sedan 2007","Geo Metro Convertible 1993","GMC Savana Van 2012","Honda Odyssey Minivan 2012","Infiniti G Coupe IPL 2012","Mercedes-Benz C-Class Sedan 2012","Nissan Leaf Hatchback 2012"]
+pytorch_classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi TTS Coupe 2012", "BMW 6 Series Convertible 2007", "Bentley Mulsanne Sedan 2011", "Cadillac CTS-V Sedan 2012", "Chevrolet Corvette Convertible 2012", "Chevrolet Malibu Sedan 2007", "Daewoo Nubira Wagon 2002", "Dodge Ram Pickup 3500 Crew Cab 2010", "FIAT 500 Convertible 2012", "Ferrari California Convertible 2012", "Fisker Karma Sedan 2012","Ford Focus Sedan 2007", "GMC Savana Van 2012", "Geo Metro Convertible 1993", "Honda Odyssey Minivan 2012", "Infiniti G Coupe IPL 2012", "Mercedes-Benz C-Class Sedan 2012", "Nissan Leaf Hatchback 2012"]
+keras_classes = [
+    "acura",
+    "audi",
+    "ferrari",
+    "bmw",
+    "bugatti",
+    "mini",
+    "cadillac",
+    "chevrolet",
+    "citroen",
+    "bentley",
+    "honda",
+    "mercedes",
+    "mazda",
+    "volvo",
+    "nissan"
+]
+
 
 img_path = None
 
@@ -52,7 +76,7 @@ def upload_file():
         img_label.image = ctk_img
         img_label.configure(text="")
 
-def search_for_car_model():
+def search_for_car_model_1():
     global img_path
     if not img_path:
         result_label.configure(text="Please upload a photo.", text_color="red")
@@ -66,23 +90,38 @@ def search_for_car_model():
 
         # Przewidywanie
         with torch.no_grad():
-            outputs = model(img_tensor)
+            outputs = pytorch_model(img_tensor)
             _, predicted_idx = torch.max(outputs, 1)
-            result = classes[predicted_idx.item()]
+            result = pytorch_classes[predicted_idx.item()]
 
-        result_label.configure(text=f"Predicted: {result}", text_color="white")
+        result_label.configure(text=f"{result}", text_color="white")
     except Exception as e:
         result_label.configure(text="Error in prediction.", text_color="red")
         print(e)
-    # img = load_img(img_path, target_size=(224, 224))
-    # img_array = img_to_array(img) / 255.0
-    # img_array = np.expand_dims(img_array, axis=0)
+        
+def search_for_car_model_2():
+    global img_path
+    if not img_path:
+        result_label.configure(text="Please upload a photo.", text_color="red")
+        return
 
-    # predictions = model.predict(img_array)
-    # result = np.argmax(predictions)
-    # result = "Tesla Model 3"
-    
-    # result_label.configure(text=f"{result}", text_color="white")
+    result_label.configure(text="")
+    try:
+        # Przetwarzanie obrazu
+        img = Image.open(img_path).convert("RGB")
+        img = img.resize((224, 224))
+        img_array = img_to_array(img) / 255.0
+        img_array = np.expand_dims(img_array, axis=0)
+
+        # Przewidywanie
+        predictions = keras_model.predict(img_array)
+        predicted_idx = np.argmax(predictions)
+        result = keras_classes[predicted_idx]
+
+        result_label.configure(text=f"{result}", text_color="white")
+    except Exception as e:
+        result_label.configure(text="Error in prediction.", text_color="red")
+        print(e)        
     
 def reset_app():
     global img_path
@@ -96,7 +135,7 @@ def reset_app():
 
 
 app = ctk.CTk()
-app.geometry("450x650")
+app.geometry("450x750")
 app.title("Car Finder")
 app.resizable(False, False)
 
@@ -128,8 +167,11 @@ img_label.pack(pady=20)
 result_label = ctk.CTkLabel(app, text="", font=ctk.CTkFont(size=18))
 result_label.pack(pady=20)
 
-find_button = ctk.CTkButton(app, text="find model", command=search_for_car_model, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
-find_button.pack(pady=20)
+find_button_1 = ctk.CTkButton(app, text="find - model I", command=search_for_car_model_1, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
+find_button_1.pack(pady=20)
+
+find_button_2 = ctk.CTkButton(app, text="find - model II", command=search_for_car_model_2, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
+find_button_2.pack(pady=20)
 
 reset_button = ctk.CTkButton(app, text="reset", command=reset_app, width=200, height=40, corner_radius=10, font=ctk.CTkFont(size=18))
 reset_button.pack(pady=20)

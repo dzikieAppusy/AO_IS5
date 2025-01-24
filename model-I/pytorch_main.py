@@ -23,10 +23,9 @@ transform = transforms.Compose([
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
 
-# Wczytaj dane z folderu
 dataset = datasets.ImageFolder(root=data_dir, transform=transform)
 
-# Podział danych na zbiory : ,treningowy, validacyjny, testowy,
+# 1. Podział danych na zbiory : treningowy, validacyjny, testowy,
 train_size = int(0.7 * len(dataset))
 val_size = int(0.15 * len(dataset))
 test_size = len(dataset) - train_size - val_size
@@ -153,8 +152,8 @@ def test(model, test_loader, device):
 train(model, train_loader, val_loader, epochs, criterion, optimizer, scheduler, device)
 
 #6. Zapis ostatecznego modelu
-torch.save(model.state_dict(), "final_model.pth")
-print("Model zapisany jako 'final_model.pth'.")
+torch.save(model.state_dict(), "best_model.pth")
+print("Model zapisany jako 'best_model.pth'.")
 
 print("Rozpoczynam testowanie modelu...")
 test(model, test_loader, device)

@@ -17,27 +17,28 @@ Aplikacja została w całości napisana w języku programowania Python. Można w
 
 
 ### 3. [Model I](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-I)
-Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. Ten znajdujący się w projekcie ma właśnie taką dokładność. Model sprawdza dobrze w przypadku samochodów o bardzo charakterystycznym wyglądzie, takich jak przykładowo Nissan Leaf Hatchback 2012,
+Model I udało się wytrenować do dokładności treningowej około 93%, walidacyjnej oraz testowej w granicach 88-90%. Model I, oparty na sieci neuronowej MobileNetV2, ma właśnie taką dokładność. Model przyjmuje obrazy RGB o stałym wymiarze 224x224 piksele, dlatego też przed jego zastosowaniem rozmiar testowanego obrazu musi zostać dostosowany do wymaganych wymiarów. Model sprawdza dobrze w przypadku samochodów o bardzo charakterystycznym wyglądzie, takich jak przykładowo Nissan Leaf Hatchback 2012,
 
 <p align="center">
-  <img src="" />
+  <img src="./readme-zdj/zdj1.png" />
+  <br />
   Zdjęcie 1. Poprawne rozpoznanie zdjęcia modelu Nissan Leaf Hatchback 2012, źródło obrazu Grafika Google.
 </p>
 
 jak również modeli samochodów o wyglądzie bardziej zbliżonym, np. model potrafi rozróżnić ze stosunkowo wysoką poprawnością Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012. 
 
 <p align="center">
-  <img src="" />
-  Zdjęcie 2. Poprawne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu imgs_zip/cars_train.
+  <img src="./readme-zdj/zdj2.png" />
+  <br />
+  Zdjęcie 2. Poprawne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu modelI/imgs_zip/cars_train.
 </p>
 <p align="center">
-  <img src="" />
-  Zdjęcie 3. Błędne rozpoznanie zdjęć modeli Chevrolet Corvette Convertible 2012 oraz Ferrari California Convertible 2012, źródło obrazu imgs_zip/cars_train.
+  <img src="./readme-zdj/zdj3.png" />
+  <br />
+  Zdjęcie 3. Błędne rozpoznanie zdjęcia modelu Chevrolet Corvette Convertible 2012, źródło obrazu modelI/imgs_zip/cars_train.
 </p>
 
-Zdecydowana większość obrazów samochodów (zarówno tych pochodzących ze zbioru zdjęć wykorzystanych do trenowania modelu jak i zdjęć z Grafiki Google) jest rozpoznawana prawidłowo.
-
-#### Marki samochodów które są rozpoznawane przez aplikację:
+#### Marki samochodów, które są rozpoznawane przez aplikację:
 ```
 Aston Martin Virage Coupe 2012
 Audi R8 Coupe 2012
@@ -61,7 +62,7 @@ Mercedes-Benz C-Class Sedan 2012
 Nissan Leaf Hatchback 2012
 ```
 
-Program na pewno działa poprawnie dla danych znajdujących się w folderze imgs_zip/cars_train, oraz dla niektórych zdjęć wypisanych powyżej modeli pochodzących z wyszukiwarki Grafiki Google. Nie uda się natomiast uzyskać pozytywnego rezultatu jeżeli wykorzystamy zdjęcie modelu auta, którego rozpoznawania model I nie został nauczony. W przypadku użycia jakiegokolwiek zdjęcia niezwiązanego z modelami aut również obiekt przedstawiony na zdjęciu nie zostanie poprawnie rozpoznany.
+Program działa poprawnie dla znacznej większości danych znajdujących się w folderze imgs_zip/cars_train, oraz dla niektórych zdjęć wypisanych powyżej modeli pochodzących z wyszukiwarki Grafiki Google. Nie uda się natomiast uzyskać pozytywnego rezultatu jeżeli wykorzystamy zdjęcie modelu auta, którego rozpoznawania model PyTorch nie został nauczony. W przypadku użycia jakiegokolwiek zdjęcia niezwiązanego z modelami aut obiekt przedstawiony na zdjęciu również nie zostanie poprawnie rozpoznany.
 
 
 
@@ -70,7 +71,7 @@ Program na pewno działa poprawnie dla danych znajdujących się w folderze imgs
 
 
 ### 5. Wymagania niezbędne do uruchomienia aplikacji
-
+W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzystanych do wytrenowania modelu oraz zbudowania aplikacji desktopowej.
 
 
 ### 6. Użytkowanie aplikacji
@@ -87,7 +88,7 @@ Aplikację uruchamiamy komendą python main.py znajdując się w głównym folde
 ### 7. Przykłady poprawnego działania aplikacji
 * model I - z użyciem losowego zdjęcia samochodu pochodzącego z Grafiki Google, samochód należy do jednej z marek, do których rozpoznawania został wytrenowany model (Infiniti G Coupe IPL 2012)
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/77228328-845f-4951-8a10-cb3309ba7015" />
+  <img src="./readme-zdj/zdj4.png" />
 </p>
 
 *
@@ -95,6 +96,7 @@ Aplikację uruchamiamy komendą python main.py znajdując się w głównym folde
 ### Źródła
 * obrazy znajdujące się w folderze imgs_zip/cars_train należą do 
 * 
+* zawartość folderu zdj-testowe-grafika-google pochodzą z Grafiki Google
 
 
 
