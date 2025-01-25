@@ -70,7 +70,8 @@ Program działa poprawnie dla znacznej większości danych znajdujących się w 
 
 
 ### 4. [Model II](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-II)
-
+Model II jest drugim podejściem do wytrenowania modelu rozpoznającego markę samochodu. Pierwsza wersja zakładała rozpoznanie marki, modelu, oraz roku produkcji samochodu (bazowane na danych z zestawu CompCars). Ilość klas wynosiła 631. Po wielodniowych treningach i dostosowywaniu parametrów, udało się osiągnąć dokładność treningową w granicach 90%, a walidacyjna oraz testowa wyniosły 76.8%. Model był trenowany na sieci neuronowej EfficientNetV2S. Niestety testy manualne pokazały, że model nie był w stanie poprawnie klasyfikować zdjęć i skupiał się na niewielkiej ilości dostępnych klas. Wyniknęło to prawdopodobnie ze względu na niezbalansowaną wagę klas, która nie została uwzględniona w trakcie treningów. Drugie podejście, które trafiło do końcowej wersji  aplikacji, oparte jest na sieci neuronowej EfficientNetV2B0 trenowanej na zestawie `imagenet`, z uwzględnieniem wag klasy (choć w przypadku dobranego zestawu nie było to konieczne, klasy posiadały równą ilość zdjęć). Ostatecznie model osiągnął dokładność treningową 88%, natomiast walidacyjna oraz testowa wyniosły 74.6%. Wejściowy obraz RGB, poddawany jest normalizacji przy pomocy wag `imagenet`, oraz przeskalowywany do rozmiarów 224x224 piksele. Model najlepiej sprawdza się w przypadku samochodów marki: Nissan, Mini, oraz Mazda (Dokładność na poziomie 92% podczas testów manualnych). Problemy pojawiają się przy rozpoznawaniu
+aut marki Chevrolet, oraz niewielkie trudności w przypadku marek Audi i Acura.
 
 
 ### 5. Wymagania niezbędne do uruchomienia aplikacji
@@ -106,7 +107,7 @@ W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requ
 
 ### 8. Źródła
 * obrazy znajdujące się w folderze model-I/imgs_zip/cars_train należą do Stanford Cars Dataset, wybrano z niego 20 klas - https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset
-* pliki z model-II/
+* obrazy na których testowany był model-II znajdują się w folderze model-II/imgs. Są one zbiorem dwóch zestawów 1. https://www.kaggle.com/datasets/yamaerenay/100-images-of-top-50-car-brands, zostało wybrane 15 klas, dla których zdjęcia uporządkowano (usunięto niepowiązane zdjęcia, zdjęcia nie będące autami, oraz zdjęcia wnętrz), a następnie uzupełniono zdjęciami z zestawu 2. CompCars https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/, tak aby osiągnąć ilość zdjęć zbliżoną do 200 na klasę.
 * zawartość folderu zdj-testowe-grafika-google pochodzą z Grafiki Google
 
 
