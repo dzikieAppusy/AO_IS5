@@ -115,9 +115,9 @@ Problemy pojawiają się przy rozpoznawaniu aut marki Chevrolet, oraz niewielkie
 
 
 ### 5. Wymagania niezbędne do uruchomienia aplikacji
-Został przygotowany plik wykonywalny pozwalający na uruchomienie aplikacji desktopowej w systemie Linux bez konieczności instalowania dodatkowych komponentów. Link do pobrania archiwum: !!! . Po wypakowaniu archiwum w głównym folderze należy wywołać komendę `./dist/main` i  odczekać około 2 minuty - po tym czasie aplikacja powinna się uruchomić.
+Został przygotowany plik wykonywalny pozwalający na uruchomienie aplikacji desktopowej w systemie Linux bez konieczności instalowania dodatkowych komponentów - [link do pobrania archiwum](https://aghedupl-my.sharepoint.com/:u:/g/personal/annov_student_agh_edu_pl/Ec3J3ra4ByNOubBmT1AZmEgBnuC4x8SHc95dl0Ytop6AOw?e=vX01VL). Po wypakowaniu archiwum, w jego głównym folderze (gdzie znajdują się foldery build oraz dist) należy wywołać komendę `./dist/main-exe`. Aplikacja potrzebuje około 2 minut na uruchomienie. Należy pamiętać żeby ustawić odpowiednie prawa dostępu `chmod -R 757 folder_z_rozpakowanym_archiwum`.
 
-W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzystanych do wytrenowania modeli oraz zbudowania aplikacji desktopowej. W celu uruchomienia aplikacji bez wykorzystania pliku wykonywalnego należy pobrać język Python oraz wszystkie niezbędne moduły, a następnie w folderze głównym aplikacji wywołać komendę `python3 main.py`.
+W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzystanych do wytrenowania modeli oraz zbudowania aplikacji desktopowej. W celu uruchomienia aplikacji bez wykorzystania pliku wykonywalnego należy pobrać język Python oraz wszystkie niezbędne moduły, a następnie w folderze głównym repozytorium wywołać komendę `python3 main.py`.
 
 
 
