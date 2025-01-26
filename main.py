@@ -41,19 +41,19 @@ pytorch_classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi
 keras_classes = [
     "Acura",
     "Audi",
-    "Ferrari",
     "BMW",
+    "Bentley",
     "Bugatti",
-    "Mini",
     "Cadillac",
     "Chevrolet",
     "Citroen",
-    "Bentley",
+    "Ferrari",
     "Honda",
-    "Mercedes",
     "Mazda",
-    "Volvo",
-    "Nissan"
+    "Mercedes-Benz",
+    "Mini",
+    "Nissan",
+    "Volvo"
 ]
 
 

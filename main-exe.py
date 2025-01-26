@@ -26,7 +26,7 @@ IMAGENET_STD = [0.229, 0.224, 0.225]
 
 def resource_path(relative_path):
     """Get absolute path to resource, works for both development and PyInstaller bundle."""
-    if hasattr(sys, "_MEIPASS"):  # PyInstaller creates a temporary folder `_MEIPASS`
+    if hasattr(sys, "_MEIPASS"):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath("."), relative_path)
 
@@ -59,19 +59,19 @@ pytorch_classes = ["Aston Martin Virage Coupe 2012", "Audi R8 Coupe 2012", "Audi
 keras_classes = [
     "Acura",
     "Audi",
-    "Ferrari",
     "BMW",
+    "Bentley",
     "Bugatti",
-    "Mini",
     "Cadillac",
     "Chevrolet",
     "Citroen",
-    "Bentley",
+    "Ferrari",
     "Honda",
-    "Mercedes",
     "Mazda",
-    "Volvo",
-    "Nissan"
+    "Mercedes-Benz",
+    "Mini",
+    "Nissan",
+    "Volvo"
 ]
 
 def upload_file():

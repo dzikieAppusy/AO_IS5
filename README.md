@@ -41,7 +41,7 @@ jak również modeli samochodów o wyglądzie bardziej zbliżonym, np. model pot
   Zdjęcie 3. Błędne rozpoznanie zdjęcia modelu Chevrolet Corvette Convertible 2012, źródło obrazu model-I/imgs_zip/cars_train.
 </p>
 
-#### Marki samochodów, które są rozpoznawane przez aplikację:
+#### Modele samochodów, które są rozpoznawane przez model I
 ```
 Aston Martin Virage Coupe 2012
 Audi R8 Coupe 2012
@@ -70,12 +70,54 @@ Program działa poprawnie dla znacznej większości danych znajdujących się w 
 
 
 ### 4. [Model II](https://github.com/dzikieAppusy/AO_IS5/tree/main/model-II)
-Model II jest drugim podejściem do wytrenowania modelu rozpoznającego markę samochodu. Pierwsza wersja zakładała rozpoznanie marki, modelu, oraz roku produkcji samochodu (bazowane na danych z zestawu CompCars). Ilość klas wynosiła 631. Po wielodniowych treningach i dostosowywaniu parametrów, udało się osiągnąć dokładność treningową w granicach 90%, a walidacyjna oraz testowa wyniosły 76.8%. Model był trenowany na sieci neuronowej EfficientNetV2S. Niestety testy manualne pokazały, że model nie był w stanie poprawnie klasyfikować zdjęć i skupiał się na niewielkiej ilości dostępnych klas. Wyniknęło to prawdopodobnie ze względu na niezbalansowaną wagę klas, która nie została uwzględniona w trakcie treningów. Drugie podejście, które trafiło do końcowej wersji  aplikacji, oparte jest na sieci neuronowej EfficientNetV2B0 trenowanej na zestawie `imagenet`, z uwzględnieniem wag klasy (choć w przypadku dobranego zestawu nie było to konieczne, klasy posiadały równą ilość zdjęć). Ostatecznie model osiągnął dokładność treningową 88%, natomiast walidacyjna oraz testowa wyniosły 74.6%. Wejściowy obraz RGB, poddawany jest normalizacji przy pomocy wag `imagenet`, oraz przeskalowywany do rozmiarów 224x224 piksele. Model najlepiej sprawdza się w przypadku samochodów marki: Nissan, Mini, oraz Mazda (Dokładność na poziomie 92% podczas testów manualnych). Problemy pojawiają się przy rozpoznawaniu
-aut marki Chevrolet, oraz niewielkie trudności w przypadku marek Audi i Acura.
+Model II jest drugim podejściem do wytrenowania modelu rozpoznającego markę samochodu. Pierwsza wersja zakładała rozpoznanie marki, modelu, oraz roku produkcji samochodu (bazowane na danych z zestawu CompCars). Ilość klas wynosiła 631. Po wielodniowych treningach i dostosowywaniu parametrów, udało się osiągnąć dokładność treningową w granicach 90%, a walidacyjna oraz testowa wyniosły 76.8%. Model był trenowany na sieci neuronowej EfficientNetV2S. Niestety testy manualne pokazały, że model nie był w stanie poprawnie klasyfikować zdjęć i skupiał się na niewielkiej ilości dostępnych klas. Wyniknęło to prawdopodobnie ze względu na niezbalansowaną wagę klas, która nie została uwzględniona w trakcie treningów. Drugie podejście, które trafiło do końcowej wersji  aplikacji, oparte jest na sieci neuronowej EfficientNetV2B0 trenowanej na zestawie `imagenet`, z uwzględnieniem wag klasy (choć w przypadku dobranego zestawu nie było to konieczne, klasy posiadały równą ilość zdjęć). Ostatecznie model osiągnął dokładność treningową 88%, natomiast walidacyjna oraz testowa wyniosły 74.6%. Wejściowy obraz RGB, poddawany jest normalizacji przy pomocy wag `imagenet`, oraz przeskalowywany do rozmiarów 224x224 piksele. 
+
+#### Marki samochodów, które są rozpoznawane przez model II
+```
+Acura
+Audi
+Ferrari
+BMW
+Bugatti
+Mini
+Cadillac
+Chevrolet
+Citroen
+Bentley
+Honda
+Mercedes
+Mazda
+Volvo
+Nissan
+```
+
+Model najlepiej sprawdza się w przypadku samochodów marki: Nissan, Mini, oraz Mazda (dokładność na poziomie 92% podczas testów manualnych). 
+
+<p align="center">
+  <img src="./readme-zdj/zdj6.png" />
+  <br />
+  Zdjęcie 4. Poprawne rozpoznanie zdjęcia samochodu marki Mini, źródło obrazu model-II/imgs.
+</p>
+
+Problemy pojawiają się przy rozpoznawaniu aut marki Chevrolet, oraz niewielkie trudności w przypadku marek Audi i Acura.
+
+<p align="center">
+  <img src="./readme-zdj/zdj8.png" />
+  <br />
+  Zdjęcie 5. Poprawne rozpoznanie zdjęcia marki Audi, źródło obrazu model-II/imgs.
+</p>
+<p align="center">
+  <img src="./readme-zdj/zdj7.png" />
+  <br />
+  Zdjęcie 6. Błędne rozpoznanie zdjęcia marki Audi, źródło obrazu Grafika Google.
+</p>
+
 
 
 ### 5. Wymagania niezbędne do uruchomienia aplikacji
-W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzystanych do wytrenowania modelu oraz zbudowania aplikacji desktopowej.
+Został przygotowany plik wykonywalny pozwalający na uruchomienie aplikacji desktopowej w systemie Linux bez konieczności instalowania dodatkowych komponentów. Link do pobrania archiwum: !!! . Po wypakowaniu archiwum w głównym folderze należy wywołać komendę `./dist/main` i  odczekać około 2 minuty - po tym czasie aplikacja powinna się uruchomić.
+
+W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requirements.txt) znajdują się informacje dotyczące modułów wykorzystanych do wytrenowania modeli oraz zbudowania aplikacji desktopowej. W celu uruchomienia aplikacji bez wykorzystania pliku wykonywalnego należy pobrać język Python oraz wszystkie niezbędne moduły, a następnie w folderze głównym aplikacji wywołać komendę `python3 main.py`.
 
 
 
@@ -85,7 +127,7 @@ W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requ
 <p align="center">
   <img src="./readme-zdj/zdj5.png" />
   <br />
-  Zdjęcie 4. Okno aplikacji desktopowej <I>Car Finder</I>.
+  Zdjęcie 7. Okno aplikacji desktopowej <I>Car Finder</I>.
 </p>
 
 * **upload photo** - przycisk odpowiadający za załadowanie zdjęcia. Otwiera okno, w którym użytkownik może wybrać z eksploratora plików zdjęcie samochodu w formacie .jpg, które chce aby model rozpoznał
@@ -96,18 +138,21 @@ W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requ
 
 
 ### 7. Przykłady poprawnego działania aplikacji
-* model I - z użyciem losowego zdjęcia samochodu pochodzącego z Grafiki Google, samochód należy do jednej z marek, do których rozpoznawania został wytrenowany model (Infiniti G Coupe IPL 2012)
+* model I - z użyciem losowego zdjęcia samochodu pochodzącego z Grafiki Google, pojazd należy do jednej z modeli ssamochodów, do których rozpoznawania został wytrenowany model (Infiniti G Coupe IPL 2012)
 <p align="center">
   <img src="./readme-zdj/zdj4.png" />
 </p>
 
-* model II - 
+* model II - z użyciem losowego zdjęcia samochodu pochodzącego z Grafiki Google, samochód należy do jednej z marek, do których rozpoznawania został wytrenowany model (Mini)
+<p align="center">
+  <img src="./readme-zdj/zdj9.png" />
+</p>
 
 
 
 ### 8. Źródła
 * obrazy znajdujące się w folderze model-I/imgs_zip/cars_train należą do Stanford Cars Dataset, wybrano z niego 20 klas - https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset
-* obrazy na których testowany był model-II znajdują się w folderze model-II/imgs. Są one zbiorem dwóch zestawów 1. https://www.kaggle.com/datasets/yamaerenay/100-images-of-top-50-car-brands, zostało wybrane 15 klas, dla których zdjęcia uporządkowano (usunięto niepowiązane zdjęcia, zdjęcia nie będące autami, oraz zdjęcia wnętrz), a następnie uzupełniono zdjęciami z zestawu 2. CompCars https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/, tak aby osiągnąć ilość zdjęć zbliżoną do 200 na klasę.
+* obrazy na których testowany był model-II znajdują się w folderze model-II/imgs. Są one zbiorem dwóch zestawów - https://www.kaggle.com/datasets/yamaerenay/100-images-of-top-50-car-brands, z którego zostało wybrane 15 klas, dla których zdjęcia uporządkowano (usunięto niepowiązane zdjęcia, zdjęcia nie będące autami, oraz zdjęcia wnętrz samochodów), a następnie uzupełniono zdjęciami z zestawu CompCars https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/, tak aby osiągnąć ilość zdjęć zbliżoną do 200 na klasę
 * zawartość folderu zdj-testowe-grafika-google pochodzą z Grafiki Google
 
 
