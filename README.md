@@ -138,7 +138,7 @@ W pliku [requirements.txt](https://github.com/dzikieAppusy/AO_IS5/blob/main/requ
 
 
 ### 7. Przykłady poprawnego działania aplikacji
-* model I - z użyciem losowego zdjęcia samochodu pochodzącego z Grafiki Google, pojazd należy do jednej z modeli ssamochodów, do których rozpoznawania został wytrenowany model (Infiniti G Coupe IPL 2012)
+* model I - z użyciem losowego zdjęcia samochodu pochodzącego z Grafiki Google, pojazd należy do jednego z modeli samochodów, do których rozpoznawania został wytrenowany model (Infiniti G Coupe IPL 2012)
 <p align="center">
   <img src="./readme-zdj/zdj4.png" />
 </p>
